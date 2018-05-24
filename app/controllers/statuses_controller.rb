@@ -1,10 +1,13 @@
 class StatusesController < ApplicationController
   def index
-    @statuses = Status.all
+    @page     = (params[:page] || 1).to_i
+    skip      = (@page-1) * 25
+    @statuses = Status.order(created_at: :desc).limit(25).offset(skip).all
   end
 
   def show
-    
+
+
   end
 
   def new
